@@ -1,0 +1,219 @@
+{
+    "fileTypes": [
+        "idl",
+        "cradle-idl"
+    ],
+    "name": "cradle-idl",
+    "patterns": [
+        {
+            "include": "#comment"
+        },
+        {
+            "include": "#module"
+        },
+        {
+            "include": "#enum"
+        },
+        {
+            "include": "#error"
+        },
+        {
+            "include": "#struct"
+        },
+        {
+            "include": "#func"
+        }
+    ],
+    "repository": {
+        "comment": {
+            "name": "comment.cradle-idl",
+            "patterns": [
+                {
+                    "include": "#comment-block"
+                },
+                {
+                    "include": "#comment-line"
+                },
+                {
+                    "include": "#doc-comment-line"
+                }
+            ]
+        },
+        "comment-block": {
+            "begin": "/\\*",
+            "end": "\\*/",
+            "name": "comment.block.cradle-idl"
+        },
+        "comment-line": {
+            "match": "(//).*$\\n?",
+            "name": "comment.line.cradle-idl"
+        },
+        "doc-comment-line": {
+            "match": "(///).*$\\n?",
+            "name": "comment.block.documentation.cradle-idl"
+        },
+        "module": {
+            "match": "\\b(module)\\s+([^;\\n]+)",
+            "captures": {
+                "1": {
+                    "name": "keyword.control.cradle-idl"
+                },
+                "2": {
+                    "name": "entity.name.type.module.cradle-idl"
+                }
+            }
+        },
+        "enum": {
+            "begin": "\\b(enum)\\b\\s*(\\w*)\\s*(?:(:)\\s*(\\w+))?\\s*\\{",
+            "beginCaptures": {
+                "1": {
+                    "name": "keyword.control.cradle-idl"
+                },
+                "2": {
+                    "name": "entity.name.type.enum.cradle-idl"
+                },
+                "3": {
+                    "name": "punctuation.separator.key-value.cradle-idl"
+                },
+                "4": {
+                    "name": "support.type.cradle-idl"
+                }
+            },
+            "end": "\\}",
+            "patterns": [
+                {
+                    "include": "#comment"
+                },
+                {
+                    "include": "#evalue"
+                }
+            ]
+        },
+        "error": {
+            "begin": "\\b(error)\\s+(\\w*)\\s*\\{",
+            "beginCaptures": {
+                "1": {
+                    "name": "keyword.control.cradle-idl"
+                },
+                "2": {
+                    "name": "entity.name.type.enum.cradle-idl"
+                }
+            },
+            "end": "\\}",
+            "patterns": [
+                {
+                    "include": "#comment"
+                },
+                {
+                    "include": "#evalue"
+                }
+            ]
+        },
+        "evalue": {
+            "match": "\\w+",
+            "name": "constant.other.enum.cradle-idl"
+        },
+        "func": {
+            "begin": "\\b(fn)\\s+(\\w+)\\s*\\(",
+            "beginCaptures": {
+                "1": {
+                    "name": "keyword.control.cradle-idl"
+                },
+                "2": {
+                    "name": "entity.name.function.cradle-idl"
+                }
+            },
+            "end": "\\)",
+            "patterns": [
+                {
+                    "include": "#comment"
+                },
+                {
+                    "include": "#field"
+                }
+            ]
+        },
+        "struct": {
+            "begin": "\\b(?:(in|out)\\s+)?(struct|handle)\\s+(\\w*)",
+            "beginCaptures": {
+                "1": {
+                    "name": "keyword.control.cradle-idl"
+                },
+                "2": {
+                    "name": "keyword.control.cradle-idl"
+                },
+                "3": {
+                    "name": "entity.name.type.struct.cradle-idl"
+                }
+            },
+            "end": "\\}",
+            "patterns": [
+                {
+                    "include": "#comment"
+                },
+                {
+                    "include": "#field"
+                }
+            ]
+        },
+        "field": {
+            "begin": "(\\w+)\\s*(?=\\:)",
+            "beginCaptures": {
+                "1": {
+                    "name": "variable.other.member.cradle-idl"
+                }
+            },
+            "end": "(,|\\}|$)",
+            "patterns": [
+                {
+                    "include": "#type"
+                },
+                {
+                    "include": "#default"
+                }
+            ]
+        },
+        "type-name": {
+            "match": "(?<=:)\\s*((?:in|out)\\s+)?(struct|enum|error|handle)?\\s*(\\w+(\\.\\w+)?)(\\[,*\\])?\\??",
+            "captures": {
+                "1": {
+                    "name": "keyword.control.cradle-idl"
+                },
+                "2": {
+                    "name": "keyword.control.cradle-idl"
+                },
+                "3": {
+                    "name": "support.type.cradle-idl"
+                }
+            }
+        },
+        "type": {
+            "patterns": [
+                {
+                    "include": "#enum"
+                },
+                {
+                    "include": "#error"
+                },
+                {
+                    "include": "#struct"
+                },
+                {
+                    "include": "#type-name"
+                }
+            ]
+        },
+        "default": {
+            "match": "=\\s*((default|null|true|false)|[-+]?([0-9]*[.])?[0-9]+([eE][-+]?\\d*)?)",
+            "captures": {
+                "2": {
+                    "name": "constant.language.cradle-idl"
+                },
+                "3": {
+                    "name": "constant.numeric.cradle-idl"
+                }
+            }
+        }
+    },
+    "scopeName": "source.cradle-idl"
+}

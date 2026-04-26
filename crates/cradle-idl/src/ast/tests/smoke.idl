@@ -1,0 +1,55 @@
+/// Main test fixture module.
+module KitchenSink;
+
+/// Primary file handle.
+handle File;
+
+/// Access modes used when opening a file.
+enum Mode : u16 {
+	Read = 1,
+	Write = 2,
+	Append = 3,
+}
+
+/// Failures that can occur before opening starts.
+error OpenError {
+	NotFound,
+	PermissionDenied,
+	Busy,
+}
+
+/// Configuration passed to open operations.
+in struct Options {
+	path: string,
+	create: bool = true,
+	labels: string[],
+}
+
+/// Request payload for reads.
+in struct ReadRequest {
+	file: File,
+	offset: u64,
+	length: u32,
+}
+
+/// Response payload for reads.
+out struct ReadResponse {
+	data: u8[],
+	checksum: u32,
+}
+
+/// Opens a file and returns a richer result shape.
+#link_name = KITCHENSINK_OpenFile
+fn OpenFile(
+	path: string,
+	options: Options,
+	grid: i32[,],
+) -> out struct OpenResult {
+	file: File,
+	mode: Mode,
+	retryable: bool,
+}, error OpenFailure {
+	NotFound,
+	PermissionDenied,
+	Busy,
+};

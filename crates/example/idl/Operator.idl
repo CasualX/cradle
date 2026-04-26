@@ -1,0 +1,16 @@
+module Operator;
+
+/// An example operator that adds two integers together.
+///
+/// This operator is used to demonstrate how to define an operator in the IDL and generate bindings for it.
+/// It includes an error case to show how to handle errors in the generated bindings.
+#link_name = "OPERATOR_Add"
+fn Add(
+	/// The first integer to add.
+	a: i32,
+	/// The second integer to add.
+	b: i32,
+) -> i32, error {
+	/// Error when the result of the addition overflows.
+	Overflow,
+};

@@ -1,0 +1,8 @@
+[package]
+name = "cradle-codegen-rust"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+cradle-idl = { path = "../cradle-idl" }
+fmtools = "0.1"

@@ -1,0 +1,21 @@
+{
+	"name": "cradle-idl",
+	"displayName": "Cradle IDL syntax highlight",
+	"version": "0.1.0",
+	"engines": {
+		"vscode": ">=0.9.0-pre.1"
+	},
+	"publisher": "Casper <CasualX@users.noreply.github.com>",
+	"contributes": {
+		"languages": [{
+			"id": "cradle-idl",
+			"aliases": ["Cradle IDL", "Cradle"],
+			"extensions": [".idl", ".cradle-idl"]
+		}],
+		"grammars": [{
+			"language": "cradle-idl",
+			"scopeName": "source.cradle-idl",
+			"path": "./syntaxes/cradle-idl.json"
+		}]
+	}
+}

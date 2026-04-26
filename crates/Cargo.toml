@@ -1,0 +1,10 @@
+[workspace]
+resolver = "2"
+members = [
+	"codegen-rust",
+	"codegen-rustsys",
+	"cradle-cli",
+	"cradle-idl",
+	"example",
+	"example-rust-out_dir",
+]

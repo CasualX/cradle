@@ -1,0 +1,10 @@
+[package]
+name = "cradle-cli"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+clap = { version = "4.0", features = ["derive"] }
+cradle-idl = { path = "../cradle-idl" }
+cradle-codegen-rust = { path = "../codegen-rust" }
+cradle-codegen-rustsys = { path = "../codegen-rustsys" }
